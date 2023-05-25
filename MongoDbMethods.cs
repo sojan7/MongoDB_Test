@@ -8,14 +8,14 @@ namespace MongoDB_Test
     {
         public List<BsonDocument> GetListOfAllMongoDbsInADbClient(MongoClient dbClient) => dbClient.ListDatabases().ToList();
 
-        public BsonDocument GetTheBsonDocumentValueUsingTriggerId(MongoDatabase mongoDatabase, int triggerId)
+        public BsonDocument GetTheBsonDocumentValueUsingUniqueId(MongoDatabase mongoDatabase, int Unique_Id)
         {
-            IMongoQuery query = Query.EQ("trigger.id", Convert.ToInt32(triggerId));
-            BsonDocument bsonDocument = mongoDatabase.GetCollection("report").FindOne(query);
+            IMongoQuery query = Query.EQ("Node_Name", Unique_Id);
+            BsonDocument bsonDocument = mongoDatabase.GetCollection("Collection_Name").FindOne(query);
             return bsonDocument;
         }
 
-        public MongoDatabase GetMongo(string connectionString, string databaseName)
+        public MongoDatabase GetMongoDatabase(string connectionString, string databaseName)
         {
             MongoClient client = new(connectionString);
             return client.GetServer().GetDatabase(databaseName);
